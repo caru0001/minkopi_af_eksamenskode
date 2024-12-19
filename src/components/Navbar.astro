@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/images/logo.webp";
+---
+
+<div x-data="{ showmenu: false }" class="w-full bg-GoldenRetriever-500">
+  <div class="flex items-center justify-between px-6 md:px-16 py-6">
+    <div id="logo">
+      <a href="/" class="flex items-center">
+        <Image class="w-auto h-12" src={logo} alt="Logo" />
+      </a>
+    </div>
+
+    <!-- Desktop Menu (Centreret) -->
+    <nav id="desktopmenu" class="absolute left-1/2 transform -translate-x-1/2 hidden lg:block">
+      <ul class="flex gap-custom90 text-base font-poppins text-BarkingAtTheMoon-500">
+        <li><a href="/pricing" class="hover:text-BarkingAtTheMoon-400 transition duration-300">Pricing</a></li>
+        <li class="relative group" x-data="{ showDropdown: false }">
+          <a href="/themenu" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false" class="hover:text-BarkingAtTheMoon-400 transition duration-300 flex items-center">
+            The Menu <span class="ml-1">&#9662;</span>
+          </a>
+
+          <!-- Dropdown-menu med hjælp fra chatgbt -->
+          <ul x-show="showDropdown" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false" x-transition class="absolute left-0 mt-0 w-64 bg-GoldenRetriever-500 drop-shadow hidden group-hover:block">
+            <li>
+              <a href="/singleview" class="block px-4 py-2 text-BarkingAtTheMoon-500 hover:bg-BarkingAtTheMoon-opacity50 hover:text-BarkingAtTheMoon-500 font-poppins transition"> Tailor-made Dry Food </a>
+            </li>
+            <li>
+              <a href="/singleview" class="block px-4 py-2 text-BarkingAtTheMoon-500 hover:bg-BarkingAtTheMoon-opacity50 hover:text-BarkingAtTheMoon-500 font-poppins transition"> Puppy Food </a>
+            </li>
+            <li>
+              <a href="/singleview" class="block px-4 py-2 text-BarkingAtTheMoon-500 hover:bg-BarkingAtTheMoon-opacity50 hover:text-BarkingAtTheMoon-500 font-poppins transition"> Hypo-Allergenic </a>
+            </li>
+            <li>
+              <a href="/singleview" class="block px-4 py-2 text-BarkingAtTheMoon-500 hover:bg-BarkingAtTheMoon-opacity50 hover:text-BarkingAtTheMoon-500 font-poppins transition"> Sensitive Stomachs </a>
+            </li>
+            <li>
+              <a href="/singleview" class="block px-4 py-2 text-BarkingAtTheMoon-500 hover:bg-BarkingAtTheMoon-opacity50 hover:text-BarkingAtTheMoon-500 font-poppins transition"> Wet Food </a>
+            </li>
+            <li>
+              <a href="/singleview" class="block px-4 py-2 text-BarkingAtTheMoon-500 hover:bg-BarkingAtTheMoon-opacity50 hover:text-BarkingAtTheMoon-500 font-poppins transition"> Senior Dog Food </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#" class="hover:text-BarkingAtTheMoon-400 transition duration-300">Our Story</a></li>
+        <li><a href="/form" class="hover:text-BarkingAtTheMoon-400 transition duration-300">Get Started</a></li>
+      </ul>
+    </nav>
+
+    <!-- CTA (Højre) -->
+    <div id="cta" class="hidden lg:flex items-center gap-8">
+      <button class="flex items-center justify-center border border-BarkingAtTheMoon-500 rounded-custom50px px-4 py-1 font-poppins text-BarkingAtTheMoon-500">
+        IE <span class="ml-1">&#9662;</span>
+      </button>
+      <a href="#" class="font-poppins text-BarkingAtTheMoon-500 hover:text-BarkingAtTheMoon-400 transition duration-300">Log In</a>
+    </div>
+
+    <!-- Burger Menu (Mobil) -->
+    <button id="burgermenu" class="lg:hidden" x-on:click="showmenu = !showmenu">
+      <span :class="{ 'rotate-45 translate-y-2': showmenu }" class="block w-8 h-0.5 bg-BarkingAtTheMoon-500 mb-2 transition-all duration-300"></span>
+      <span :class="{ 'opacity-0': showmenu }" class="block w-8 h-0.5 bg-BarkingAtTheMoon-500 mb-2 transition-all duration-300"></span>
+      <span :class="{ '-rotate-45 -translate-y-2': showmenu }" class="block w-8 h-0.5 bg-BarkingAtTheMoon-500 transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <!-- Mobilmenu -->
+  <nav id="mobilmenu" class="lg:hidden bg-GoldenRetriever-500 pb-8" x-show="showmenu" x-transition>
+    <ul class="flex flex-col items-center gap-16 py-8 text-BarkingAtTheMoon-500 font-poppins">
+      <li><a href="/pricing" class="hover:text-BarkingAtTheMoon-400">Home</a></li>
+      <li><a href="/pricing" class="hover:text-BarkingAtTheMoon-400">Pricing</a></li>
+      <li x-data="{ showDropdown: false }" class="w-full text-center">
+        <button @click="showDropdown = !showDropdown" class="flex justify-center items-center w-full px-4 py-2 hover:text-BarkingAtTheMoon-400">
+          The Menu <span class="ml-2" x-text="showDropdown ? '▲' : '▼'"></span>
+        </button>
+        <!-- Dropdown -->
+        <ul x-show="showDropdown" x-transition class="bg-GoldenRetriever-600 text-BarkingAtTheMoon-500 w-full px-4 py-2 space-y-2 text-center">
+          <li>
+            <a href="/singleview" class="block hover:text-BarkingAtTheMoon-400 pt-3 pb-8 text-SalmonTreat-500"> Tailor-made Dry Food </a>
+          </li>
+          <li>
+            <a href="/singleview" class="block hover:text-BarkingAtTheMoon-400 pb-8 text-SalmonTreat-500"> Puppy Food </a>
+          </li>
+          <li>
+            <a href="/singleview" class="block hover:text-BarkingAtTheMoon-400 pb-8 text-SalmonTreat-500"> Hypoallergenic </a>
+          </li>
+          <li>
+            <a href="/singleview" class="block hover:text-BarkingAtTheMoon-400 pb-8 text-SalmonTreat-500"> Sensitive Stomachs </a>
+          </li>
+          <li>
+            <a href="/singleview" class="block hover:text-BarkingAtTheMoon-400 pb-8 text-SalmonTreat-500"> Wet Food </a>
+          </li>
+          <li>
+            <a href="/singleview" class="block hover:text-BarkingAtTheMoon-400 pb-8 text-SalmonTreat-500"> Senior Dog Food </a>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#" class="hover:text-BarkingAtTheMoon-400">Our Story</a></li>
+      <li><a href="/form" class="hover:text-BarkingAtTheMoon-400">Get Started</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Script to add active class based on current URL -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const currentPath = window.location.pathname;
+    const menuItems = document.querySelectorAll("#desktopmenu > ul > li > a"); // Kun links i den øvre menu
+
+    menuItems.forEach((item) => {
+      if (item.getAttribute("href") === currentPath) {
+        item.classList.add("border-b-2", "border-BarkingAtTheMoon-500");
+      }
+    });
+  });
+</script>
